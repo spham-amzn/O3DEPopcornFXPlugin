@@ -19,6 +19,18 @@ if(NOT PAL_TRAIT_POPCORNFX_SUPPORTED)
     return()
 endif()
 
+option(O3DE_DISABLE_PK "Disable Popcorn FX" OFF)
+
+if (O3DE_DISABLE_PK)
+   set(O3DE_PK_COMPILE_OPTIONS)
+   set(O3DE_PK_DEP_OPTIONS)
+   set(O3DE_PK_DEP_EDITOR_OPTIONS)
+else()
+   set(O3DE_PK_OPTIONS O3DE_USE_PK)
+   set(O3DE_PK_DEP_OPTIONS 3rdParty::PopcornFX)
+   set(O3DE_PK_DEP_EDITOR_OPTIONS 3rdParty::PopcornFXEditor)
+endif()
+
 add_compile_definitions(PK_O3DE_MAJOR_VERSION=${PK_O3DE_MAJOR_VERSION})
 add_compile_definitions(PK_O3DE_PATCH_VERSION=${PK_O3DE_PATCH_VERSION})
 
@@ -42,7 +54,7 @@ ly_add_target(
         ../Assets/popcornfx_asset_files.cmake
     COMPILE_DEFINITIONS
         PUBLIC
-            O3DE_USE_PK
+            ${O3DE_PK_COMPILE_OPTIONS}
             PK_USE_PHYSX
             PK_USE_EMOTIONFX
             PK_USE_STARTINGPOINTINPUT
@@ -57,7 +69,7 @@ ly_add_target(
             AZ::AzFramework
             AZ::AzCore
             AZ::AtomCore
-            3rdParty::PopcornFX
+            ${O3DE_PK_DEP_OPTIONS}
             Gem::Atom_Utils.Static
             Gem::Atom_RPI.Public
             Gem::Atom_RHI.Public
@@ -152,7 +164,7 @@ if(PAL_TRAIT_BUILD_HOST_TOOLS)
             PRIVATE
                 AZ::AssetBuilderSDK
                 AZ::AzToolsFramework
-                3rdParty::PopcornFXEditor
+                ${O3DE_PK_DEP_EDITOR_OPTIONS}
                 Gem::PopcornFX.Static
         RUNTIME_DEPENDENCIES
             Gem::LmbrCentral.Editor
