@@ -44,8 +44,8 @@ namespace PopcornFX {
 		AZStd::string	m_Name;
 		AZStd::string	m_Description;
 		AZ::u32			m_Id;
-		AZ::u32			m_Type;
-		AZ::u32			m_Semantic;
+		[[maybe_unused]] AZ::u32			m_Type;
+		[[maybe_unused]] AZ::u32			m_Semantic;
 
 		//Values
 		float			m_ValueFX = 0.0f;
@@ -135,10 +135,10 @@ namespace PopcornFX {
 		AZ::u32		OnSamplerChanged();
 
 		//Desc
-		AZ::u32			m_Id;
+		[[maybe_unused]] AZ::u32			m_Id;
 		AZStd::string	m_Name;
 		AZStd::string	m_Description;
-		AZ::u32			m_Type;
+		[[maybe_unused]] AZ::u32			m_Type;
 		AZ::EntityId	m_EntityId;
 
 		//Values
