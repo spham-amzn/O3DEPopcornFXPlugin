@@ -43,7 +43,7 @@ namespace PopcornFX {
 		AZ::EntityId	m_EntityId;
 		AZStd::string	m_Name;
 		AZStd::string	m_Description;
-		AZ::u32			m_Id;
+		[[maybe_unused]] AZ::u32			m_Id;
 		[[maybe_unused]] AZ::u32			m_Type;
 		[[maybe_unused]] AZ::u32			m_Semantic;
 
